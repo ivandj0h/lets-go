@@ -6,11 +6,11 @@ import (
 	"log"
 )
 
-type MYSQLStorage struct {
+type MySQLStorage struct {
 	db *sql.DB
 }
 
-func NewMYSQLStorage(cfg mysql.Config) *MYSQLStorage {
+func NewMySQLStorage(cfg mysql.Config) *MySQLStorage {
 	db, err := sql.Open("mysql", cfg.FormatDSN())
 	if err != nil {
 		log.Fatal(err)
@@ -22,10 +22,10 @@ func NewMYSQLStorage(cfg mysql.Config) *MYSQLStorage {
 	}
 
 	log.Println("MySQL has been Connected!")
-	return &MYSQLStorage{db: db}
+	return &MySQLStorage{db: db}
 }
 
-func (s *MYSQLStorage) Init() (*sql.DB, error) {
+func (s *MySQLStorage) Init() (*sql.DB, error) {
 
 	// table init
 

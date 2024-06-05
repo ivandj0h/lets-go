@@ -18,16 +18,16 @@ var Envs = initConfig()
 
 func initConfig() Config {
 	return Config{
-		Port:       getENV("PORT", "8080"),
-		DBUser:     getENV("DB_USER", "root"),
-		DBPassword: getENV("DB_PASSWORD", ""),
-		DBAddress:  fmt.Sprintf("$s:$s", getENV("DB_HOST", "127.0.0.1"), getENV("DB_PORT", "3306")),
-		DBName:     getENV("DB_NAME", "lets-go"),
-		JWTSecret:  getENV("JWT_SECRET", "U81LohcwYBKow8XXhCqvgC4iJe3mjW"),
+		Port:       getEnv("PORT", "8080"),
+		DBUser:     getEnv("DB_USER", "root"),
+		DBPassword: getEnv("DB_PASSWORD", ""),
+		DBAddress:  fmt.Sprintf("%s:%s", getEnv("DB_HOST", "127.0.0.1"), getEnv("DB_PORT", "3306")),
+		DBName:     getEnv("DB_NAME", "lets-go"),
+		JWTSecret:  getEnv("JWT_SECRET", "randomjwtsecretkey"),
 	}
 }
 
-func getENV(key, fallback string) string {
+func getEnv(key, fallback string) string {
 	if value, ok := os.LookupEnv(key); ok {
 		return value
 	}
