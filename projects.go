@@ -29,7 +29,12 @@ func (s *ProjectService) handleCreateProject(w http.ResponseWriter, r *http.Requ
 		return
 	}
 
-	defer r.Body.Close()
+	defer func(Body io.ReadCloser) {
+		err := Body.Close()
+		if err != nil {
+
+		}
+	}(r.Body)
 
 	var project *Project
 	err = json.Unmarshal(body, &project)
