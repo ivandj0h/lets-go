@@ -1,12 +1,12 @@
 package main
 
 import (
-	"github.com/go-sql-driver/mysql"
 	"log"
+
+	"github.com/go-sql-driver/mysql"
 )
 
 func main() {
-
 	cfg := mysql.Config{
 		User:                 Envs.DBUser,
 		Passwd:               Envs.DBPassword,
@@ -25,6 +25,7 @@ func main() {
 	}
 
 	store := NewStore(db)
-	api := NewApiServer(":3000", store)
-	api.Serve()
+
+	server := NewAPIServer(":8080", store)
+	server.Serve()
 }
