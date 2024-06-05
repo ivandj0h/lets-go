@@ -2,8 +2,10 @@ package main
 
 import (
 	"database/sql"
-	"github.com/go-sql-driver/mysql"
+	"fmt"
 	"log"
+
+	"github.com/go-sql-driver/mysql"
 )
 
 type MySQLStorage struct {
@@ -21,18 +23,18 @@ func NewMySQLStorage(cfg mysql.Config) *MySQLStorage {
 		log.Fatal(err)
 	}
 
-	log.Println("MySQL has been Connected!")
+	fmt.Println("Connected to MySQL!")
+
 	return &MySQLStorage{db: db}
 }
 
 func (s *MySQLStorage) Init() (*sql.DB, error) {
-
-	// table init
-	if err := s.createProjectsTable(); err != nil {
+	// initialize the tables
+	if err := s.createUsersTable(); err != nil {
 		return nil, err
 	}
 
-	if err := s.createUsersTable(); err != nil {
+	if err := s.createProjectsTable(); err != nil {
 		return nil, err
 	}
 
